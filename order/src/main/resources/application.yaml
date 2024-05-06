@@ -1,0 +1,7 @@
+college:
+  info:
+    base-package: college.order
+
+logging:
+  level:
+    college.order: INFO
