@@ -1,6 +1,6 @@
 college:
   info:
-    base-package: college.order
+    base-package: college
 
 logging:
   level:

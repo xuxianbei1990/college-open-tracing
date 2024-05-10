@@ -41,8 +41,6 @@
 			<artifactId>hutool-all</artifactId>
 			<version>5.8.25</version>
 		</dependency>
-
-
 		<dependency>
 			<groupId>org.apache.skywalking</groupId>
 			<artifactId>apm-toolkit-trace</artifactId>
@@ -57,17 +55,8 @@
 			<groupId>org.apache.skywalking</groupId>
 			<artifactId>apm-toolkit-opentracing</artifactId>
 			<version>${skywalking.version}</version>
-			<!--                <exclusions>-->
-			<!--                    <exclusion>-->
-			<!--                        <artifactId>opentracing-api</artifactId>-->
-			<!--                        <groupId>io.opentracing</groupId>-->
-			<!--                    </exclusion>-->
-			<!--                    <exclusion>-->
-			<!--                        <artifactId>opentracing-util</artifactId>-->
-			<!--                        <groupId>io.opentracing</groupId>-->
-			<!--                    </exclusion>-->
-			<!--                </exclusions>-->
 		</dependency>
+
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -85,6 +74,7 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
