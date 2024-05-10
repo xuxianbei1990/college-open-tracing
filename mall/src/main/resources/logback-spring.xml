@@ -3,8 +3,8 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
     <springProperty scope="context" name="college.info.base-package" source="college.info.base-package"/>
     <!-- 格式化输出：%d 表示日期，%X{tid} SkWalking 链路追踪编号，%thread 表示线程名，%-5level：级别从左显示 5 个字符宽度，%msg：日志消息，%n是换行符 -->
-    <property name="PATTERN_DEFAULT" value="%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} | %highlight(${LOG_LEVEL_PATTERN:-%5p} ${PID:- }) | %boldYellow(%thread [%tid]) %boldGreen(%-40.40logger{39}) | %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
-    <property name="PATTERN_FILE" value="%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} | %(${LOG_LEVEL_PATTERN:-%5p} ${PID:- }) | %(%thread [%tid]) %(%-40.40logger{39}) | %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+    <property name="PATTERN_DEFAULT" value="%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} | %highlight(${LOG_LEVEL_PATTERN:-%5p} ${PID:- }) | %boldYellow(%thread [%tid]) %boldGreen(%-40.40logger{39}) |%n  --%m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+    <property name="PATTERN_FILE" value="%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} | %(${LOG_LEVEL_PATTERN:-%5p} ${PID:- }) | %(%thread [%tid]) %(%-40.40logger{39}) |%n  --%m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
     <property name="log.path" value="logs"/>
     <!-- 控制台 Appender -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">　　　　　
