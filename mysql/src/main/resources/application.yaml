@@ -1,0 +1,22 @@
+college:
+  info:
+    base-package: college
+
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://127.0.0.1:3306/test_yudao_mall?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: 1
+      password: 1
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      testWhileIdle: true
+      validationQuery: select 1
+      testOnBorrow: true
+      validationInterval: 1000
+      timeBetweenEvictionRunsMillis: 3600000
+      minEvictableIdleTimeMillis: 18000000
+      min-idle: 10
+      initial-size: 10
+      max-active: 10
+      testOnConnect: true
+      initSQL: select 1

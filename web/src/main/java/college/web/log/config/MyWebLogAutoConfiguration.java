@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Bean;
 public class MyWebLogAutoConfiguration {
 
     @Bean
-    @ConditionalOnProperty(prefix = "my.access-log", value = "enable", matchIfMissing = true) // 允许使用 yudao.access-log.enable=false 禁用访问日志
+    @ConditionalOnProperty(prefix = "my.access-log", value = "enable", matchIfMissing = true) // 允许使用 my.access-log.enable=false 禁用访问日志
     public FilterRegistrationBean<WebAccessLogFilter> apiAccessLogFilter() {
         WebAccessLogFilter filter = new WebAccessLogFilter();
         return createFilterBean(filter, WebFilterOrderEnum.API_ACCESS_LOG_FILTER);

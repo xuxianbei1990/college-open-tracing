@@ -1,0 +1,35 @@
+package college.mysql.controller;
+
+import college.mysql.dao.MemberUserMapper;
+import college.mysql.entity.MemberUserDO;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+/**
+ * User: EDY
+ * Date: 2024/5/11
+ * Time: 10:43
+ * Version:V1.0
+ */
+@RequestMapping("mysql")
+@RestController
+@Slf4j
+public class MysqlTestController {
+
+    @Resource
+    private MemberUserMapper memberUserMapper;
+
+    @GetMapping("memberList")
+    public List<MemberUserDO> getMemberList() {
+        log.info("hello mysql 神主日");
+        return memberUserMapper.selectList(Wrappers.<MemberUserDO>lambdaQuery().last("LIMIT 10"));
+    }
+
+
+}
