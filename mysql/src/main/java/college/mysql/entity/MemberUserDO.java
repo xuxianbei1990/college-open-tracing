@@ -52,7 +52,7 @@ public class MemberUserDO {
     /**
      * 是否删除
      */
-    @TableLogic
+//    @TableLogic
     private Boolean deleted;
 
     // ========== 账号信息 ==========

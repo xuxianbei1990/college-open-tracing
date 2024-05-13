@@ -60,7 +60,6 @@
     <logger name="com.alibaba.nacos" level="INFO" additivity="false"/>
     <logger name="com.alibaba.cloud.nacos" level="INFO" additivity="false"/>
     <logger name="org.springframework.web.servlet" level="INFO" additivity="false"/>
-    <logger name="org.apache.catalina.core" level="INFO" additivity="false"/>
     <logger name="org.springframework.boot" level="INFO" additivity="false"/>
     <!-- 修改指定包的日志级别 -->
     <logger name="college.mysql" level="DEBUG"/>
