@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 
 
 @Component
-@RocketMQMessageListener(topic = "sample_topic", consumerGroup = "sample_consumer_group",
+@RocketMQMessageListener(topic = "sample-topic", consumerGroup = "sample_consumer_group",
         messageModel = MessageModel.BROADCASTING)
 public class SamplerConsumer implements RocketMQListener<MessageExt> {
 
