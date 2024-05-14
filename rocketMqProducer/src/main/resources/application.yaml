@@ -1,0 +1,9 @@
+rocketmq:
+  name-server: 127.0.0.1:9876
+  producer:
+    group: sample_producer_group
+    send-message-timeout: 30000
+  consumer:
+    group: sample_consumer_group
+server:
+  port: 7002
