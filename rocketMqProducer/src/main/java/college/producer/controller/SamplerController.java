@@ -1,14 +1,17 @@
 package college.producer.controller;
 
 import jakarta.annotation.Resource;
-import org.apache.rocketmq.client.exception.MQBrokerException;
-import org.apache.rocketmq.client.exception.MQClientException;
-import org.apache.rocketmq.remoting.exception.RemotingException;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageHeaders;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * User: EDY
@@ -24,8 +27,19 @@ public class SamplerController {
     private RocketMQTemplate rocketMQTemplate;
 
     @GetMapping("send")
-    public String send() throws MQBrokerException, RemotingException, InterruptedException, MQClientException {
-        rocketMQTemplate.syncSend("sample-topic", "sample test");
+    public String send() {
+        rocketMQTemplate.syncSend("sample-topic", "sample test:" + TraceContext.traceId());
+        return "Hello, World!";
+    }
+
+    @GetMapping("send/traceId")
+    public String sendTraceId() {
+        Map<String, Object> headers = new HashMap<>();
+        headers.put("traceId", TraceContext.traceId());
+        MessageHeaders messageHeaders = new MessageHeaders(headers);
+
+        Message<?> message = MessageBuilder.createMessage("sample test traceId ", messageHeaders);
+        rocketMQTemplate.syncSend("sample-topic", message);
         return "Hello, World!";
     }
 }

@@ -1,3 +1,7 @@
+college:
+  info:
+    base-package: college
+
 rocketmq:
   name-server: 127.0.0.1:9876
   producer:
@@ -5,5 +9,3 @@ rocketmq:
     send-message-timeout: 30000
   consumer:
     group: sample_consumer_group
-server:
-  port: 7002
