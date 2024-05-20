@@ -1,5 +1,6 @@
 package college.order.controller;
 
+import college.order.vo.SampleVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,4 +22,13 @@ public class SampleController {
     public String hello(@RequestParam String owner) {
         return "Hello order!" + owner;
     }
+
+    @GetMapping("hello/entiry")
+    public SampleVO helloEntity(@RequestParam String owner) {
+        SampleVO sampleVO = new SampleVO();
+        sampleVO.setName(owner);
+        sampleVO.setAge(25);
+        return sampleVO;
+    }
+
 }
