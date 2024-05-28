@@ -7,7 +7,7 @@ package college.mysql.handler.after;
  * Time: 14:58
  * Version:V1.0
  */
-public interface Handler {
+public interface Handler<T> {
 
-    void execute();
+    void execute(T t);
 }

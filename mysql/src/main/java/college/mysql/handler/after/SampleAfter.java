@@ -11,8 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class SampleAfter implements Handler2 {
 
+
     @Override
-    public void execute() {
+    public void execute(Object o) {
         System.out.println("SampleAfter execute");
     }
 }

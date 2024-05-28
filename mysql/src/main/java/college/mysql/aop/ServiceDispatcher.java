@@ -42,9 +42,10 @@ public class ServiceDispatcher {
             if (!interfaceToCheck.isAssignableFrom(clazz)) {
                 throw new IllegalStateException(clazz.getName() + " does not implement " + interfaceToCheck.getName());
             }
+            Object[] args = joinPoint.getArgs();
             for (Handler handler : handlerList) {
                 if (clazz == handler.getClass()) {
-                    handler.execute();
+                    handler.execute(args[0]);
                 }
             }
 
