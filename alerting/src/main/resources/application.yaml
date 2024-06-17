@@ -1,0 +1,21 @@
+college:
+  info:
+    base-package: college
+
+logging:
+  level:
+    college.order: INFO
+
+spring:
+  application:
+    name: alerting-center
+
+
+  profiles:
+    active: dev
+
+server:
+  tomcat:
+    accept-count: 10000
+    max-threads: 300
+  port: 7303
