@@ -1,4 +1,4 @@
-package college.mysql.handler.after;
+package college.mysql.handler;
 
 import org.springframework.stereotype.Service;
 

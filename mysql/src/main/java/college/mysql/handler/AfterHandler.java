@@ -1,4 +1,4 @@
-package college.mysql.handler.after;
+package college.mysql.handler;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

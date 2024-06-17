@@ -2,9 +2,9 @@ package college.mysql.service;
 
 import college.mysql.dao.MemberUserMapper;
 import college.mysql.entity.MemberUserDO;
-import college.mysql.handler.after.AfterHandler;
-import college.mysql.handler.after.Handler2;
-import college.mysql.handler.after.SampleAfter;
+import college.mysql.handler.AfterHandler;
+import college.mysql.handler.Handler2;
+import college.mysql.handler.SampleAfter;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;

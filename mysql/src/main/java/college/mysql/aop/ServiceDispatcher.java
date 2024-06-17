@@ -1,16 +1,20 @@
 package college.mysql.aop;
 
-import college.mysql.handler.after.AfterHandler;
-import college.mysql.handler.after.Handler;
+import college.mysql.handler.AfterHandler;
+import college.mysql.handler.BeforeHandler;
+import college.mysql.handler.Handler;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * 服务调度器
@@ -26,15 +30,25 @@ public class ServiceDispatcher {
     @Autowired
     private List<Handler> handlerList;
 
+
+    @Before("execution(* college.mysql.service.*.*(..))\"")
+    public void beforeServiceExecution(JoinPoint joinPoint) {
+        doDispatch(joinPoint, BeforeHandler.class, (method) -> method.getAnnotation(BeforeHandler.class).value());
+    }
+
     /**
      * 这种方式拦截，和主函数是共用一个事务，如果这里报错，事务也会回滚
      */
-    @After("execution(* college.mysql.service.*.*(..))")
+    @AfterReturning("execution(* college.mysql.service.*.*(..))\"")
     public void afterServiceExecution(JoinPoint joinPoint) {
+        doDispatch(joinPoint, AfterHandler.class, (method) -> method.getAnnotation(AfterHandler.class).value());
+    }
+
+    private void doDispatch(JoinPoint joinPoint, Class<? extends Annotation> annotationClass, Function<Method, Class<?>> get) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
-        if (method.isAnnotationPresent(AfterHandler.class)) {
-            Class<?> clazz = method.getAnnotation(AfterHandler.class).value();
+        if (method.isAnnotationPresent(annotationClass)) {
+            Class<?> clazz = get.apply(method);
             Class<Handler> interfaceToCheck = Handler.class;
             if (clazz.isInterface()) {
                 throw new IllegalStateException(clazz.getName() + " is an interface");
@@ -42,13 +56,13 @@ public class ServiceDispatcher {
             if (!interfaceToCheck.isAssignableFrom(clazz)) {
                 throw new IllegalStateException(clazz.getName() + " does not implement " + interfaceToCheck.getName());
             }
-            Object[] args = joinPoint.getArgs();
+            Object object = joinPoint.getArgs()[0];
             for (Handler handler : handlerList) {
                 if (clazz == handler.getClass()) {
-                    handler.execute(args[0]);
+                    handler.execute(object);
                 }
             }
-
         }
     }
+
 }
