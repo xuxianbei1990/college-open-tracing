@@ -20,7 +20,8 @@ public class SampleController {
     private OrderApiService orderApiService;
 
     @GetMapping("hello/order")
-    public String hello() {
+    public String hello() throws InterruptedException {
+        Thread.sleep(1000);
         return orderApiService.sample("I am a mall");
     }
 }

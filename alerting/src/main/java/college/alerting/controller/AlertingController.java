@@ -17,7 +17,7 @@ public class AlertingController {
     @PostMapping("save-alert")
     public String saveAlert(@RequestBody List<AlarmMessage> alarmMessages) {
         log.info(alarmMessages.toString());
-        alarmMessages.addAll(alarmMessages);
+        this.alarmMessages.addAll(alarmMessages);
         return "Alert saved successfully";
     }
 
