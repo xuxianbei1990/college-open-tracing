@@ -12,7 +12,7 @@ spring:
       # 路由配置项，对应 RouteDefinition 数组
       routes:
         - id: netty
-          uri: ws://localhost:8001
+          uri: lb:ws://netty-server
           predicates:
             - Path=/ws/**
 

@@ -22,7 +22,7 @@ import java.net.InetSocketAddress;
 
 @Configuration
 public class NettyConfiguration {
-    private int port = 8001;
+    public static final int port = 8001;
 
     @Autowired
     private EchoServerHandler echoServerHandler;
@@ -40,7 +40,6 @@ public class NettyConfiguration {
 
     @Bean
     public ServerBootstrap serverBootstrap(EventLoopGroup boosGroup, EventLoopGroup workerGroup) {
-
         ServerBootstrap bootstrap = new ServerBootstrap();
         bootstrap.group(boosGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
@@ -61,8 +60,5 @@ public class NettyConfiguration {
                     }
                 });
         return bootstrap;
-
     }
-
-
 }
