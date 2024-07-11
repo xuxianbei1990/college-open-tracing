@@ -30,6 +30,8 @@ public class ServiceDispatcher {
     @Autowired
     private List<Handler> handlerList;
 
+    private ThreadLocal<Object> contextThreadLocal = new ThreadLocal<>();
+
 
     @Before("execution(* college.mysql.service.*.*(..))\"")
     public void beforeServiceExecution(JoinPoint joinPoint) {
@@ -39,9 +41,14 @@ public class ServiceDispatcher {
     /**
      * 这种方式拦截，和主函数是共用一个事务，如果这里报错，事务也会回滚
      */
-    @AfterReturning("execution(* college.mysql.service.*.*(..))\"")
-    public void afterServiceExecution(JoinPoint joinPoint) {
-        doDispatch(joinPoint, AfterHandler.class, (method) -> method.getAnnotation(AfterHandler.class).value());
+    @AfterReturning(pointcut = "execution(* college.mysql.service.*.*(..))\"", returning = "result")
+    public void afterServiceExecution(JoinPoint joinPoint, Object result) {
+        contextThreadLocal.set(result);
+        try {
+            doDispatch(joinPoint, AfterHandler.class, (method) -> method.getAnnotation(AfterHandler.class).value());
+        } finally {
+            contextThreadLocal.remove();
+        }
     }
 
     private void doDispatch(JoinPoint joinPoint, Class<? extends Annotation> annotationClass, Function<Method, Class<?>> get) {
@@ -60,6 +67,7 @@ public class ServiceDispatcher {
             for (Handler handler : handlerList) {
                 if (clazz == handler.getClass()) {
                     handler.execute(object);
+                    handler.executeResult(contextThreadLocal.get());
                 }
             }
         }
