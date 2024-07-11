@@ -11,8 +11,4 @@ public interface Handler<T> {
 
     void execute(T t);
 
-    default void executeResult(T t) {
-
-    }
-
 }

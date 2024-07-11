@@ -32,6 +32,10 @@ public class ServiceDispatcher {
 
     private ThreadLocal<Object> contextThreadLocal = new ThreadLocal<>();
 
+    public Object getResult() {
+        return contextThreadLocal.get();
+    }
+
 
     @Before("execution(* college.mysql.service.*.*(..))\"")
     public void beforeServiceExecution(JoinPoint joinPoint) {
@@ -67,7 +71,6 @@ public class ServiceDispatcher {
             for (Handler handler : handlerList) {
                 if (clazz == handler.getClass()) {
                     handler.execute(object);
-                    handler.executeResult(contextThreadLocal.get());
                 }
             }
         }
