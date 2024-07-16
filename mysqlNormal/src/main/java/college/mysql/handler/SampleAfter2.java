@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
  * Version:V1.0
  */
 @Service
-public class SampleAfter implements Handler2 {
+public class SampleAfter2 implements Handler2 {
 
 
     @Override
     public void execute(Object o) {
-        System.out.println("SampleAfter execute");
-//        throw new RuntimeException("SampleAfter execute error");
+        System.out.println("SampleAfter execute2");
+        throw new RuntimeException("SampleAfter execute2 error");
     }
 }

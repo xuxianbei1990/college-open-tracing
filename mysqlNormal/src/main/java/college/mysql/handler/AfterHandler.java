@@ -19,5 +19,5 @@ public @interface AfterHandler {
      * 要执行的Handler类
      * @return
      */
-    Class<? extends Handler> value();
+     Class<? extends Handler>[] value();
 }

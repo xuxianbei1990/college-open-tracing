@@ -55,12 +55,13 @@ public class ServiceDispatcher {
         }
     }
 
-    private void doDispatch(JoinPoint joinPoint, Class<? extends Annotation> annotationClass, Function<Method, Class<?>> get) {
+    private void doDispatch(JoinPoint joinPoint, Class<? extends Annotation> annotationClass, Function<Method, Class<?>[]> get) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
         if (method.isAnnotationPresent(annotationClass)) {
-            Class<?> clazz = get.apply(method);
+            Class<?>[] clazzs = get.apply(method);
             Class<Handler> interfaceToCheck = Handler.class;
+            for (Class<?> clazz : clazzs) {
             if (clazz.isInterface()) {
                 throw new IllegalStateException(clazz.getName() + " is an interface");
             }
@@ -72,6 +73,7 @@ public class ServiceDispatcher {
                 if (clazz == handler.getClass()) {
                     handler.execute(object);
                 }
+            }
             }
         }
     }
